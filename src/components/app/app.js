@@ -12,9 +12,9 @@ class App extends Component {
     super(props);
 
     this.data = [
-        { name: 'Alex C.', salary: 899, id: 0, increase: false },
-        { name: 'Ben S.', salary: 1400, id: 1, increase: true },
-        { name: 'Smith W.', salary: 5400, id: 2, increase: false },
+        { name: 'Alex C.', salary: 899, id: 0, increase: false, isLike: false },
+        { name: 'Ben S.', salary: 1400, id: 1, increase: true, isLike: true },
+        { name: 'Smith W.', salary: 5400, id: 2, increase: false, isLike: false },
     ];
   }
 
