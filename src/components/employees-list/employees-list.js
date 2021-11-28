@@ -1,16 +1,22 @@
+import { Component } from "react";
 import EmployeesListItem from "../employees-list-item/employees-list-item";
-
 import './employees-list.scss';
 
-const EmployeesList = ({ data }) => {
-    // <EmployeesListItem name={item.name} salary={item.salary} key={item.id} />
-    let users = data.map(item =>  <EmployeesListItem {...item} key={item.id} /> );
+class EmployeesList extends Component {
+    constructor(props) {
+        super(props);
 
-    return (
-        <ul className="app-list list-group">
-            {users}
-        </ul>
-    )
+        // <EmployeesListItem name={item.name} salary={item.salary} key={item.id} />
+        this.users = this.props.data.map(item =>  <EmployeesListItem {...item} key={item.id} /> );
+    }
+    
+    render() {
+        return (
+            <ul className="app-list list-group">
+                {this.users}
+            </ul>
+        )
+    }
 }
 
 export default EmployeesList;
