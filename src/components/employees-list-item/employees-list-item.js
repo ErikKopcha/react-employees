@@ -7,6 +7,7 @@ class EmployeesListItem extends Component {
 
         this.name = this.props.name;
         this.salary = this.props.salary;
+        this.onDelete = typeof this.props.onDelete === 'function' ? this.props.onDelete : () => {};
 
         this.state = {
             increase: this.props.increase,
@@ -52,8 +53,10 @@ class EmployeesListItem extends Component {
                         <i className="fas fa-cookie"></i>
                     </button>
 
-                    <button type="button"
-                            className="btn-trash btn-sm ">
+                    <button 
+                        onClick={() => this.onDelete()}
+                        type="button"
+                        className="btn-trash btn-sm">
                         <i className="fas fa-trash"></i>
                     </button>
                     

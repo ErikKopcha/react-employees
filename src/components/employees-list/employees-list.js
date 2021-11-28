@@ -1,22 +1,25 @@
 import { Component } from "react";
 import EmployeesListItem from "../employees-list-item/employees-list-item";
-import './employees-list.scss';
+import "./employees-list.scss";
 
 class EmployeesList extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        // <EmployeesListItem name={item.name} salary={item.salary} key={item.id} />
-        this.users = this.props.data.map(item =>  <EmployeesListItem {...item} key={item.id} /> );
-    }
-    
-    render() {
-        return (
-            <ul className="app-list list-group">
-                {this.users}
-            </ul>
-        )
-    }
+    this.onDelete = typeof this.props.onDelete === 'function' ? this.props.onDelete : null;
+  }
+
+  render() {
+    const users = this.props.data.map(item => (
+      <EmployeesListItem
+        onDelete={() => this.onDelete(item.id)}
+        {...item}
+        key={item.id}
+      />
+    ));
+
+    return <ul className="app-list list-group">{users}</ul>;
+  }
 }
 
 export default EmployeesList;
