@@ -4,7 +4,7 @@ import SearchPanel from "../search-panel/search-panel";
 import AppFilter from "../app-filter/app-filter";
 import EmployeesList from "../employees-list/employees-list";
 import EmployeesAddForm from "../employees-add-form/employees-add-form";
-
+import nextId from "react-id-generator";
 import "./app.scss";
 
 class App extends Component {
@@ -20,8 +20,24 @@ class App extends Component {
     }
   }
 
+  addUser({ name, salary }) {
+    const id = nextId();
+    const newEmployee = {
+      name,
+      salary,
+      id,
+      increase: false, 
+      isLike: false
+    };
+
+    this.setState(({ data }) => {
+      const newData = [...data, newEmployee];
+      return { data: newData }
+    })
+  }
+
   deleteUser(id) {
-    this.setState(({data}) => {
+    this.setState(({ data }) => {
         return { data: data.filter(item => item.id !== id) }
     })
   }
@@ -39,7 +55,7 @@ class App extends Component {
         <EmployeesList 
           onDelete={id => this.deleteUser(id)}
           data={this.state.data} />
-        <EmployeesAddForm />
+        <EmployeesAddForm onSubmit={(data) => this.addUser(data)} />
       </div>
     );
   }
