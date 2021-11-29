@@ -13,9 +13,9 @@ class App extends Component {
 
     this.state = {
       data: [
-        { name: "Alex C.", salary: 899, id: 0, increase: false, isLike: false },
-        { name: "Ben S.", salary: 1400, id: 1, increase: true, isLike: true },
-        { name: "Smith W.", salary: 5400, id: 2, increase: false, isLike: false }
+        { name: "Alex C.", salary: 899, id: 0, increase: false, rise: false },
+        { name: "Ben S.", salary: 1400, id: 1, increase: true, rise: true },
+        { name: "Smith W.", salary: 5400, id: 2, increase: false, rise: false }
       ]
     }
   }
@@ -26,8 +26,8 @@ class App extends Component {
       name,
       salary,
       id,
-      increase: false, 
-      isLike: false
+      increase: false,
+      rise: false
     };
 
     this.setState(({ data }) => {
@@ -42,6 +42,14 @@ class App extends Component {
     })
   }
 
+  onToggleIncrease(id) {
+    
+  }
+
+  onToggleRise(id) {
+    
+  }
+
   render() {
     return (
       <div className="app">
@@ -54,7 +62,10 @@ class App extends Component {
 
         <EmployeesList 
           onDelete={id => this.deleteUser(id)}
-          data={this.state.data} />
+          data={this.state.data}
+          onToggleIncrease={() => { this.onToggleIncrease() }}
+          onToggleRise={() => { this.onToggleRise() }}
+        />
         <EmployeesAddForm onSubmit={(data) => this.addUser(data)} />
       </div>
     );

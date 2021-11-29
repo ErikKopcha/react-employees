@@ -3,16 +3,14 @@ import EmployeesListItem from "../employees-list-item/employees-list-item";
 import "./employees-list.scss";
 
 class EmployeesList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.onDelete = typeof this.props.onDelete === 'function' ? this.props.onDelete : null;
-  }
-
   render() {
-    const users = this.props.data.map(item => (
+    const { onDelete, onToggleRise, onToggleIncrease, data } = this.props;
+
+    const users = data.map(item => (
       <EmployeesListItem
-        onDelete={() => this.onDelete(item.id)}
+        onDelete={() => onDelete(item.id)}
+        onToggleRise={() => onToggleRise(item.id)}
+        onToggleIncrease={() => onToggleIncrease(item.id)}
         {...item}
         key={item.id}
       />

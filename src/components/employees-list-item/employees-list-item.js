@@ -2,59 +2,34 @@ import { Component } from 'react';
 import './employees-list-item.scss';
 
 class EmployeesListItem extends Component {
-    constructor(props) {
-        super(props);
-
-        this.name = this.props.name;
-        this.salary = this.props.salary;
-        this.onDelete = typeof this.props.onDelete === 'function' ? this.props.onDelete : () => {};
-
-        this.state = {
-            increase: this.props.increase,
-            isLike: this.props.isLike,
-        };
-    }
-
-    onIncrease(event) {
-        this.setState(({increase}) => ({
-            increase: !increase
-        }));
-    }
-
-    setLike(event) {
-        this.setState(({isLike}) => ({
-            isLike: !isLike
-        }));
-    }
 
     render() {
-        this.increase = this.state.increase;
-        this.isLike = this.state.isLike;
+        const { name, salary, onDelete, onToggleIncrease, onToggleRise, increase, rise} = this.props;
 
         return (
             <li 
                 className={`list-group-item d-flex justify-content-between 
-                    ${this.increase ? 'increase' : ''}
-                    ${this.isLike ? 'like' : ''}
+                    ${increase ? 'increase' : ''}
+                    ${rise ? 'like' : ''}
                 `}>
 
-                <span className="list-group-item-label">{this.name}</span>
-                <input type="text" className="list-group-item-input" defaultValue={this.salary + '$'}/>
+                <span className="list-group-item-label">{name}</span>
+                <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
                 <div className='d-flex justify-content-center align-items-center'>
                     <button type="button"
-                        onClick={(e) => this.setLike(e)}
+                        onClick={() => onToggleRise()}
                         className="btn-like btn-sm ">
                         <i className="fas fa-heart"></i>
                     </button>
 
                     <button type="button"
-                        onClick={(e) => this.onIncrease(e)}
+                        onClick={() => onToggleIncrease()}
                         className="btn-cookie btn-sm ">
                         <i className="fas fa-cookie"></i>
                     </button>
 
                     <button 
-                        onClick={() => this.onDelete()}
+                        onClick={() => onDelete()}
                         type="button"
                         className="btn-trash btn-sm">
                         <i className="fas fa-trash"></i>
