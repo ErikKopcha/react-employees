@@ -4,13 +4,13 @@ import "./employees-list.scss";
 
 class EmployeesList extends Component {
   render() {
-    const { onDelete, onToggleRise, onToggleIncrease, data } = this.props;
+    const { onDelete, onToggleProp, data } = this.props;
 
     const users = data.map(item => (
       <EmployeesListItem
         onDelete={() => onDelete(item.id)}
-        onToggleRise={() => onToggleRise(item.id)}
-        onToggleIncrease={() => onToggleIncrease(item.id)}
+        onToggleRise={() => onToggleProp(item.id, 'rise')}
+        onToggleIncrease={() => onToggleProp(item.id, 'increase')}
         {...item}
         key={item.id}
       />
