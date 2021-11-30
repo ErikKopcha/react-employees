@@ -9,8 +9,8 @@ class EmployeesList extends Component {
     const users = data.map(item => (
       <EmployeesListItem
         onDelete={() => onDelete(item.id)}
-        onToggleRise={() => onToggleProp(item.id, 'rise')}
-        onToggleIncrease={() => onToggleProp(item.id, 'increase')}
+        onToggleRise={(event) => onToggleProp(item.id, event.currentTarget.getAttribute('data-toggle'))}
+        onToggleIncrease={(event) => onToggleProp(item.id, event.currentTarget.getAttribute('data-toggle'))}
         {...item}
         key={item.id}
       />

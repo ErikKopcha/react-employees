@@ -17,14 +17,16 @@ class EmployeesListItem extends Component {
                 <input type="text" className="list-group-item-input" defaultValue={salary + '$'}/>
                 <div className='d-flex justify-content-center align-items-center'>
                     <button type="button"
-                        onClick={() => onToggleRise()}
-                        className="btn-like btn-sm ">
+                        onClick={(e) => onToggleRise(e)}
+                        className="btn-like btn-sm"
+                        data-toggle="rise">
                         <i className="fas fa-heart"></i>
                     </button>
 
                     <button type="button"
-                        onClick={() => onToggleIncrease()}
-                        className="btn-cookie btn-sm ">
+                        onClick={(e) => onToggleIncrease(e)}
+                        className="btn-cookie btn-sm"
+                        data-toggle="increase">
                         <i className="fas fa-cookie"></i>
                     </button>
 
