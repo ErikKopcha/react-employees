@@ -42,8 +42,8 @@ class EmployeesAddForm extends Component {
                 fieldValidationErrors.name = nameValid ? '' : ' is invalid (min length 3)';
                 break;
             case 'salary':
-                salaryValid = value !== '';
-                fieldValidationErrors.salary = salaryValid ? '': ' is too short';
+                salaryValid = value !== '' && +value !== 0;
+                fieldValidationErrors.salary = salaryValid ? '' : ' must be a number and greater than zero';
                 break;
             default:
                 break;

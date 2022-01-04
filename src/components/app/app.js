@@ -16,7 +16,9 @@ class App extends Component {
         { name: "Alex C.", salary: 899, id: 0, increase: false, rise: false },
         { name: "Ben S.", salary: 1400, id: 1, increase: true, rise: true },
         { name: "Smith W.", salary: 5400, id: 2, increase: false, rise: false }
-      ]
+      ],
+      term: '',
+      filterType: 1
     }
   }
 
@@ -54,9 +56,50 @@ class App extends Component {
     }));
   }
 
+  searchEmp(items, term) {
+    if (term.length === 0) {
+      return items; 
+    }
+
+    return items.filter(item => {
+      return item.name.toLowerCase().indexOf(term.toLowerCase()) > -1
+    });
+  }
+
+  getFilteredItems(items, type) {
+    let filtered = [];
+
+    switch (type) {
+      case 1:
+        filtered = items;
+        break;
+      case 2:
+        filtered = items.filter(item => item.rise);
+        break;
+      case 3: 
+        filtered = items.filter(item => item.salary > 1000);
+        break;
+      default:
+        filtered = items;
+        break;
+    }
+
+    return filtered;
+  }
+
+  onUpdateSearch(term = '') {
+    this.setState({ term });
+  }
+
+  onUpdateFilter(type = 1) {
+    this.setState({ filterType: type });
+  }
+
   render() {
+    const { data, term, filterType } = this.state;
     const employeesCount = this.state.data.length;
     const increaseCount = this.state.data.filter(el => el.rise).length;
+    const visibleData = this.getFilteredItems(this.searchEmp(data, term), filterType); ;
 
     return (
       <div className="app">
@@ -65,14 +108,14 @@ class App extends Component {
           employeesCount={employeesCount} />
 
         <div className="search-panel">
-          <SearchPanel />
-          <AppFilter />
+          <SearchPanel onUpdateTerm={(term) => { this.onUpdateSearch(term) }} />
+          <AppFilter onUpdateFilter={(type) => { this.onUpdateFilter(type); } } />
         </div>
 
         <EmployeesList 
-          onDelete={id => this.deleteUser(id)}
-          data={this.state.data}
           onToggleProp={(id, prop) => { this.onToggleProp(id, prop) }}
+          onDelete={(id) => this.deleteUser(id)}
+          data={visibleData}
         />
         <EmployeesAddForm onSubmit={(data) => this.addUser(data)} />
       </div>
